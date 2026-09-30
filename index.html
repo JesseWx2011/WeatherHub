@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>WeatherHub • Home</title>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="WeatherHub is here for all your weather resource needs! Find the latest weather information for a location, track a tropical cyclone, compare weather data sources, and more, all at no cost here." />
+    <!-- One crazy long line of keywords lol -->
+    <meta name="tags"
+        conten="weather, tropical storms now, hurricanes now, tropical, tropical weather, hurricane, hurricane erin, hurricane katrina, hurricane, tornado, tornado warning, tornado warnings now, tornadoes today, tornado usa, tornadoes yesterday, weather archive, weather history, weather history my location, weather my location, weather now, weather now my location, weather radar, weather radar my location, weather radar near me, weather radar near me live, weather radar near me now, weather radar near me today, weather radar near me tomorrow, weather radar near me usa, weather radar near me usa live, weather radar near me usa now, weather radar near me usa today, weather radar near me usa tomorrow, weather radar near me usa live today, weather radar near me usa live tomorrow, weather radar near me usa live now" />
+    <meta name="language" content="en" />
+
+    <meta http-equiv='Page-Enter' content='RevealTrans(Duration=2.0,Transition=2)'>
+    <meta http-equiv='Page-Exit' content='RevealTrans(Duration=3.0,Transition=12)'>
+    <meta name='mssmarttagspreventparsing' content='true'>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+
+
+    <meta name='revised' content='Saturday, September 30th, 2026, 3:13 pm'>
+    <meta name='date' content='Sep. 30, 2026' <meta name='search_date' content='2026-09-30'>
+
+    <meta name='og:title' content='WeatherHub'>
+    <meta name='og:type' content='weather'>
+    <meta name='og:url' content='http://weatherhub.vercel.app/'>
+    <meta name='og:image' content='https://weatherhub.vercel.app/assests/images/weatherhub-ban.png'>
+    <meta name='og:site_name' content='WeatherHub'>
+
+
+    <!--- CSS -->
+
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <!-- JS -->
+
+    <!-- Nothing yet. -->
+
+</head>
+
+<body>
+
+    <header>
+        <h1 class="header-title">WeatherHub</h1>
+        <p>Hub is where the weather's at!</p>
+
+        <button class="open-button" onclick="openMenu()">
+            <img src="./assets/icons/menu.svg">
+        </button>
+
+        <div id="ww_eb408887fe2c9" v='1.3' loc='auto'
+            a='{"t":"responsive","lang":"en","sl_lpl":1,"ids":[],"font":"Veradana","sl_ics":"one_a","sl_sot":"fahrenheit","cl_bkg":"#FFFFFF00","cl_font":"#000000","cl_cloud":"#d4d4d4","cl_persp":"#2196F3","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722","cl_odd":"#00000000"}'>
+            Weather Data Source: <a href="https://wetterlang.de" id="ww_eb408887fe2c9_u" target="_blank">7 Day Weather Forecast</a></div>
+        <script async src="https://app3.weatherwidget.org/js/?id=ww_eb408887fe2c9"></script>
+    </header>
+
+    <nav>
+        <button class="close-button" onclick="closeMenu()">
+            <img src="./assets/icons/close.svg">
+        </button>
+        <li><a class="active" href="./">Home</a></li>
+        <li><a href="./tropics/">Tropics</a>
+            <div class="badge-indicator">Hurricane Season Updates!</div>
+        </li>
+        <li><a href="./current/">Current</a></li>
+        <li><a href="./severe/">Severe Wx</a></li>
+        <li><a href="./cams/">Camera Monitors</a></li>
+        <li><a href="./about">About</a></li>
+    </nav>
+
+    <!-- Hero Section -->
+
+    <div class="hero-section">
+        <video id="hero-video" muted playsinline preload="auto" hidden></video>
+        <div id="black-overlay"></div>
+        <div class="hero-text">
+            <h1>Welcome to WeatherHub!</h1>
+
+            <p id="hero-p-text">WeatherHub has all your weather needs and resources. When it comes to severe weather,
+                hurricane activity, or a town's weather history, WeatherHub gives you access to that at no cost. See the
+                pages below for more.</p>
+        </div>
+
+        <!-- Collection Grid -->
+
+        <div class="hero-grid">
+            <div class="hero-grid-item">
+                <img class="hero-img" src="./assets/media/tropical-cover.jpg" alt="Tropical Tracker page image">
+
+                <h2>Tropics</h2>
+                <p>Track tropical cyclones around the world with the tropical tracker tool. Also find historical
+                    hurricane data and tracks at this page too.</p>
+            </div>
+
+            <div class="hero-grid-item">
+                <img class="hero-img" src="./assets/media/severe-wx-cover.png" alt="Severe Weather page image">
+
+                <h2>Severe Weather</h2>
+                <p>Track severe weather, not in just the USA, but all across the world. See convective severe weather,
+                    latest weather outlooks, and more.</p>
+            </div>
+
+            <div class="hero-grid-item">
+                <img class="hero-img" src="./assets/media/camera-cover.jpg" alt="Severe Weather page image">
+
+                <h2>Camera Monitoring</h2>
+                <p>See the weather happening all across the world via live camera feeds active across the world. All of
+                    these cameras are free to use too!</p>
+            </div>
+
+            <div class="hero-grid-item">
+                <img class="hero-img" src="./assets/media/current-wx-cover.jpg" alt="Severe Weather page image">
+
+                <h2>Current Weather</h2>
+                <p>Look up any location across the planet, and get all the weather details, historical data, geography,
+                    and weather for locations nearby.</p>
+            </div>
+
+
+            <div class="hero-grid-item">
+                <img class="hero-img" src="./assets/media/winter-cover.jpg" alt="Severe Weather page image">
+
+                <div
+                    style="width: 100%; display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center;">
+                    <h2>Winter</h2>
+                    <div class="badge-indicator">Coming this Fall!</div>
+                </div>
+                <p>View winter weather information across the United States, seasonal forecasts, snowfall maps, and more
+                    here.</p>
+            </div>
+
+
+            <div class="hero-grid-item">
+                <img class="hero-img" src="./assets/media/about-cover.jpg" alt="About page image">
+
+                <h2>About</h2>
+                <p>Learn about the development of WeatherHub and its creators, how it was made and the main inspiration
+                    towards creating this app, along with its history. </p>
+            </div>
+
+
+        </div>
+
+        <div class="weather-status-section">
+            <h2>Weather Status</h2>
+
+            <div class="time-flex">
+                <div class="time-card">
+                    <h2>Current Time</h2>
+                    <span id="timeLocal">12:00:34 AM</span>
+                </div>
+
+                <div class="time-card">
+                    <h2>UTC Time</h2>
+                    <span id="timeUTC">12:00:34 AM</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- End of Hero Section -->
+
+    <footer>
+
+        <div class="main-footer">
+
+
+            <div class="footer-heading footer-1">
+                <h2>BROWSE</h2>
+                <a href="../">HOME</a>
+                <a href="../" class="footer-link active">CURRENT WX</a>
+                <a href="../">SEVERE</a>
+                <a href="../">WINTER</a>
+                <a href="../">TROPICS</a>
+                <a href="../">ABOUT</a>
+            </div>
+            <div class="footer-heading footer-2">
+                <h2>FOLLOW ME</h2>
+                <a href="https://github.com/JesseWx2011">GITHUB</a>
+                <a href="https://youtube.com/@JesseLikesWeather">YOUTUBE</a>
+                <a href="https://x.com/atthestoorm">TWITTER / X</a>
+            </div>
+            <div class="footer-heading footer-3">
+                <h2>CONTACT/INFO</h2>
+                <a href="mailto:jesselikeswx@outlook.com">CONTACT</a>
+                <a href="https://wx-hub.vercel.app/">W3 Validation</a>
+            </div>
+
+
+
+        </div>
+    </footer>
+
+
+    <!-- JS -->
+    <script src="./js/index.js"></script>
+    <script src="./js/mechanics.js"></script>
+    <script src="./js/unsupported.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>WeatherHub • Current Weather</title>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="WeatherHub is here for all your weather resource needs! Find the latest weather information for a location, track a tropical cyclone, compare weather data sources, and more, all at no cost here." />
+    <!-- One crazy long line of keywords lol -->
+    <meta name="tags"
+        content="weather, weather my location, weather my location now, weather now, weather at my location, current weather, weather forecast, weather forecast my location, weather history, weather history my location, my location, my location climate, my location weather history" />
+    <meta name="language" content="en" />
+
+
+    <meta http-equiv='Page-Enter' content='RevealTrans(Duration=2.0,Transition=2)'>
+    <meta http-equiv='Page-Exit' content='RevealTrans(Duration=3.0,Transition=12)'>
+    <meta name='mssmarttagspreventparsing' content='true'>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+
+
+    <meta name='revised' content='Saturday, September 30th, 2026, 3:13 pm'>
+    <meta name='date' content='Sep. 30, 2026' />
+
+    <meta name='search_date' content='2026-09-30'>
+
+    <meta name='og:title' content='WeatherHub'>
+    <meta name='og:type' content='weather'>
+    <meta name='og:url' content='http://weatherhub.vercel.app/'>
+    <meta name='og:image' content='https://weatherhub.vercel.app/assests/images/media/current-wx-cover.jpg'>
+    <meta name='og:site_name' content='WeatherHub'>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/index.css" /> <!-- For Header/Footer -->
+    <link rel="stylesheet" href="../css/current.css" />
+
+    <!-- FontAwesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+        integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+    <header>
+        <h1 class="header-title">WeatherHub</h1>
+        <p>Hub is where the weather's at!</p>
+
+        <button class="open-button" onclick="openMenu()">
+            <img src="../assets/icons/menu.svg">
+        </button>
+    </header>
+    <nav>
+        <button class="close-button" onclick="closeMenu()">
+            <img src="../assets/icons/close.svg">
+        </button>
+        <li><a href="../">Home</a></li>
+        <li><a href="../tropics/">Tropics</a>
+            <div class="badge-indicator">Hurricane Season Updates!</div>
+        </li>
+        <li><a class="active" href="./">Current</a></li>
+        <li><a href="../severe/">Severe Wx</a></li>
+        <li><a href="../cams/">Camera Monitors</a></li>
+        <li><a href="../about">About</a></li>
+    </nav>
+
+
+
+    <main>
+        <aside class="current-page-nav is-collapsed" aria-label="Current weather pages">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <h2>Current Weather</h2>
+                <button class="dropdown-arrow" id="dropdownArrow" type="button"
+                    aria-label="Toggle current weather navigation" aria-expanded="false">
+                    <img src="../assets/icons/chevron.svg" alt="">
+                </button>
+            </div>
+            <ul>
+                <li><a href="#">Overview</a></li>
+                <li><a href="#">Weather Forecast</a></li>
+                <li><a href="#">Historical Data</a></li>
+                <li><a href="#">Weather Alerts</a></li>
+                <li><a href="#">Alerts</a></li>
+                <li><a href="#">Radar</a></li>
+            </ul>
+        </aside>
+
+        <section class="current-content">
+            <div class="unit-switcher" role="group" aria-label="Temperature unit">
+                <button class="unit-option is-active" type="button" data-unit="e" aria-pressed="true">°F</button>
+                <button class="unit-option" type="button" data-unit="m" aria-pressed="false">°C</button>
+            </div>
+
+            <div class="location-container">
+
+                <h1 id="locationName">Current Weather</h1>
+
+                <button class="sync-button" onclick="currentConditionsData(); GrabAlertData()" id="syncButton">
+                    <img class="sync-image" id="syncImage" src="../assets/icons/sync.svg">
+                </button>
+
+            </div>
+
+
+            <p class="current-time" id="currentTime">--:--:--</p>
+
+            <div class="weather-items">
+                <div class="location-dropdown">
+                    <input class="location-search" id="locationInput"
+                        placeholder="Search for a location, e.g. Scottsbluff, NE...">
+                    <div class="dropdowns">
+                        <ul>
+                            <li class="location-dropdown-item">Pensacola, FL</li>
+                            <li class="location-dropdown-item">Pensacola, FL</li>
+                            <li class="location-dropdown-item">Pensacola, FL</li>
+                            <li class="location-dropdown-item">Pensacola, FL</li>
+                            <li class="location-dropdown-item">Pensacola, FL</li>
+                        </ul>
+                    </div>
+                </div>
+                <label class="favorite-location" id="favLocation">
+                    <input onclick="homeLocation()" type="checkbox" id="favorite-icon" class="favorite-checkbox"
+                        aria-label="Favorite location">
+                    <svg class="star-icon" viewBox="0 0 24 24" xmlns="http://w3.org">
+                        <path
+                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                </label>
+            </div>
+
+            <div class="dashboard" id="dashboard">
+
+                <div class="item-row weather-card-grid">
+                    <div class="item-large" id="gridCard1">
+                        <h1 class="item-large-heading">Now</h1>
+
+                        <div class="item-large-row">
+                            <h2 class="temperature" id="temperature">84°F</h2>
+                            <img class="weather-icon" id="weatherIcon"
+                                src="../assets/icons/meteocons/animated/not-available.svg"
+                                alt="Weather icon unavailable">
+                        </div>
+
+                        <p class="weather-item-indicator" id="weatherCond">Mostly Sunny</p>
+
+                        <p class="weather-item-indicator" id="tempFeel" style="font-weight: bold;">Warm</p>
+
+                        <div class="sunrise-sunset-card">
+                            <div class="sunrise-sunset-heading">
+                                <h3>Sunrise &amp; Sunset</h3>
+                                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                            </div>
+                            <div class="sunrise-sunset-times">
+                                <div class="sunrise-sunset-time">
+                                    <span>Sunrise</span>
+                                    <strong id="sunrise">6:00 AM</strong>
+                                </div>
+                                <div class="sunrise-sunset-time">
+                                    <span>Sunset</span>
+                                    <strong id="sunset">6:00 PM</strong>
+                                </div>
+                            </div>
+                            <p class="day-length" id="dayLength">Daylight <strong id="dayLengthVal">--</strong></p>
+                        </div>
+                    </div>
+
+
+                    <div class="item-small" id="gridCard2">
+                        <div class="item-small-heading">
+                            <h3>Feels Like</h3><i class="fa-solid fa-temperature-half" aria-hidden="true"></i>
+                        </div>
+                        <p class="item-small-value" id="feels-like-temperature">--</p>
+                    </div>
+
+                    <div class="item-small" id="gridCard3">
+                        <div class="item-small-heading">
+                            <h3>Humidity</h3><i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                        </div>
+                        <p class="item-small-value" id="humidity">--</p>
+                    </div>
+
+                    <div class="item-small" id="gridCard4">
+                        <div class="item-small-heading">
+                            <h3>Dew Point</h3><i class="fa-solid fa-water" aria-hidden="true"></i>
+                        </div>
+                        <p class="item-small-value" id="dewpoint">--</p>
+                    </div>
+
+
+                    <div class="item-small" id="gridCard5">
+                        <div class="item-small-heading">
+                            <h3>Wind</h3><i class="fa-solid fa-wind" aria-hidden="true"></i>
+                        </div>
+                        <p class="item-small-value" id="wind-spd">--</p>
+                        <p class="item-small-indicator" id="wind-dir">--</p>
+                    </div>
+
+                    <div class="item-small" id="gridCard6">
+                        <div class="item-small-heading">
+                            <h3>Pressure</h3><i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
+                        </div>
+                        <p class="item-small-value" id="pressure">--</p>
+                    </div>
+
+                    <div class="item-small" id="gridCard7">
+                        <div class="item-small-heading">
+                            <h3>UV Index</h3><i class="fa-solid fa-sun" aria-hidden="true"></i>
+                        </div>
+                        <p class="item-small-value" id="uv-index">--</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-row" id="itemRow2">
+
+
+                <div class="item-small" id="radarCard">
+                    <div class="item-small-heading">
+                        <h3>Local Radar</h3>
+                    </div>
+                    <img class="radar-image" id="radarImage"
+                        src="https://s.w-x.co/staticmaps/wu/wu/wxtype1200_cur/conus/animate.png"
+                        alt="Radar image of USA">
+
+                    <div class="time-slider-box">
+                        <div class="time-slider-value" id="timeSliderVal">Now</div>
+                        <input class="time-slider" id="timeSlider" type="range" min="0" max="12" value="12">
+                    </div>
+                </div>
+
+                <div class="item-small" id="nearbyObsCard">
+                    <div class="item-small-heading">
+                        <h3>NEARBY OBSERVATIONS</h3>
+                    </div>
+
+                    <br>
+
+                    <div class="nearby-obs-rows">
+
+                        <div class="nearby-observations-row">
+                            <p class="nearby-city" id="nearbyCity">-</p>
+
+                            <p class="nearby-temp" id="nearbyTemp">-</p>
+                            <img class="nearby-obs-icon" src="../assets/icons/meteocons/animated/not-available.svg">
+                        </div>
+                        <div class="nearby-observations-row">
+                            <p class="nearby-city" id="nearbyCity">-</p>
+
+                            <p class="nearby-temp" id="nearbyTemp">-</p>
+                            <img class="nearby-obs-icon" src="../assets/icons/meteocons/animated/not-available.svg">
+                        </div>
+                        <div class="nearby-observations-row">
+                            <p class="nearby-city" id="nearbyCity">-</p>
+
+                            <p class="nearby-temp" id="nearbyTemp">-</p>
+                            <img class="nearby-obs-icon" src="../assets/icons/meteocons/animated/not-available.svg">
+                        </div>
+                        <div class="nearby-observations-row">
+                            <p class="nearby-city" id="nearbyCity">-</p>
+
+                            <p class="nearby-temp" id="nearbyTemp">-</p>
+                            <img class="nearby-obs-icon" src="../assets/icons/meteocons/animated/not-available.svg">
+                        </div>
+                        <div class="nearby-observations-row">
+                            <p class="nearby-city" id="nearbyCity">-</p>
+
+                            <p class="nearby-temp" id="nearbyTemp">-</p>
+                            <img class="nearby-obs-icon" src="../assets/icons/meteocons/animated/not-available.svg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-small" id="airQualityCard">
+                    <div class="item-small-heading" id="airQualityHeading">
+                        <h3>AIR QUALITY</h3>
+                    </div>
+
+                    <h2 class="air-quality-value" id="airQuality">55</h2>
+
+                    <div class="air-quality-index" id="airQualityCategory">Moderate</div>
+
+                    <div class="air-quality-action" id="airQualityAction">Unsually sensitive people to Ozone or
+                        Particulate Matter should avoid prolonged exposure to the outdoors.</div>
+
+                    <p id="disclaimer">Disclaimer: <i>
+                            Neither the European Commission nor ECMWF is responsible for any use of this
+                            information."</i></p>
+
+                </div>
+            </div>
+            <!-- | End of item row. | -->
+            </div>
+        </section>
+
+        <!-- Alerts Banner -->
+        <div class="alert-container" id="alertContainer">
+            <div class="alert alert-danger">
+                <div class="alert-row">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p class="alert-text" id="alertHeadlineText">Severe Thunderstorm Warning for Milton, Florida until
+                        5:45
+                        PM <span>(13 min from
+                            now)</span></p>
+
+                    <img class="alert-close" id="closeIcon" src="../assets/icons/close.svg">
+                </div>
+
+
+                <!-- <h4>Hazards:</h4>
+                <div class="hazards-section" id="hazardsSection">
+                    <li>Wind Gusts: 60 MPH</li>
+                    <li>Hail: 0.75"</li>
+                    <li>Tornado: POSSIBLE</li> -->
+
+            </div>
+            <p class="alert-link" id="alertLink">Click <a href="#">here </a>for more information.</p>
+        </div>
+
+        <div class="warning-container" id="internetContainer">
+            <div id="internetContainerLevel" class="alert alert-warning">
+                <div class="alert-row">
+
+                    <p id="internetText">Your internet connection is offline!</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <!-- Audio -->
+
+
+
+    <footer>
+
+        <div class="main-footer">
+
+
+            <div class="footer-heading footer-1">
+                <h2>BROWSE</h2>
+                <a href="../">HOME</a>
+                <a href="../" class="footer-link active">CURRENT WX</a>
+                <a href="../">SEVERE</a>
+                <a href="../">WINTER</a>
+                <a href="../">TROPICS</a>
+                <a href="../">ABOUT</a>
+            </div>
+            <div class="footer-heading footer-2">
+                <h2>FOLLOW ME</h2>
+                <a href="https://github.com/JesseWx2011">GITHUB</a>
+                <a href="https://youtube.com/@JesseLikesWeather">YOUTUBE</a>
+                <a href="https://x.com/atthestoorm">TWITTER / X</a>
+            </div>
+            <div class="footer-heading footer-3">
+                <h2>CONTACT/INFO</h2>
+                <a href="mailto:jesselikeswx@outlook.com">CONTACT</a>
+                <a href="https://wx-hub.vercel.app/">W3 Validation</a>
+            </div>
+
+
+
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="../js/mechanics.js"></script>
+    <script src="../js/unsupported.js"></script>
+    <script src="../js/current.js"></script>
+</body>
+
+</html>
